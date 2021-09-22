@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="style.css">
+
+
+
+  <!-- HERE JavaScript Libs & Style Sheets-->
+  <link rel="stylesheet" type="text/css" href="https://js.api.here.com/v3/3.1/mapsjs-ui.css" />
+  <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-core.js"></script>
+  <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-service.js"></script>
+  <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-ui.js"></script>
+  <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js"></script>
+
+
+  <title>TP Final</title>
+</head>
+
+<body>
+
+  <!----------------- NAVBAR ----------------->
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">SSearch</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Inicio <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#buscar">Buscar</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#mapa">Mapa</a>
+        </li>
+
+      </ul>
+    </div>
+  </nav>
+
+  <!----------------- HEADER ----------------->
+
+  <section class="banner">
+    <div class="banner_info">
+      <h1 class="banner_title">
+        Bienvenido
+      </h1>
+      <p class="banner_p">
+        🦎 Mucha suerte en tu busqueda! 🦎 2021
+      </p>
+    </div>
+  </section>
+  <div class="wrapper">
+    <div class="whitespace"></div>
+
+    <!----------------- BUSCAR ----------------->
+
+    <section id="buscar" class="buscar">
+      <div class="container">
+        <div class="row">
+          <div class="col-3 col-lg-3 col-sm-12"></div>
+          <div class="col-6 col-lg-6 col-sm-12">
+
+            <div class="row">
+              <div class="col-6 col-lg-6 col-sm-7">
+                <p>¿Cargar ubicación desde una API?</p>
+              </div>
+              <div class="col-6 col-lg-6 col-sm-5"> <a href="#mapa"><button type="button" id="btn-cords"
+                    class="btn slideUpBtn">Cargar</button></a></div>
+            </div>
+
+          </div>
+          <div class="col-3 col-lg-3 col-sm-12"></div>
+
+
+        </div>
+      </div>
+    </section>
+    
+
+    <!----------------- MAPA ----------------->
+
+    <section id="mapa" class="mapa">
+
+      <div style="width: 100%;height: 90vh;" id="mapContainer"></div>
+
+    </section>
+
+
+
+  </div>
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+  </script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+  </script>
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script type="text/javascript" src='main.js'></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"> </script>
+  <script>
+    $("#btn-cords").click(function () {
+      getAPI();
+    });
+
+    function getAPI() {
+
+      $.ajax({
+        url: "https://nhorenstein.com/Coordenada/GetConPunto",
+        type: "GET",
+
+        success: function (result) {
+          if (result.ok) {
+            LocationOfMarker = {
+              lat: result.return.latitud,
+              lng: result.return.longitud
+            };
+            marker.setGeometry(LocationOfMarker);
+            map.setCenter(LocationOfMarker);
+            map.setZoom(12)
+            Swal.fire({
+              icon: 'success',
+              title: 'Todo Perfecto',
+              text: 'Se ha cargado la ubicación en el mapa!'
+
+            })
+
+          } else {
+            console.log("error")
+
+          }
+        },
+        error: function (error) {
+
+          LocationOfMarker = {
+            lat: -31.442833432567536,
+            lng: -64.19400626410122
+          };
+          marker.setGeometry(LocationOfMarker);
+          map.setCenter(LocationOfMarker);
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'No se pudo conectar con el servidor!'
+          })
+        }
+      });
+
+    }
+
+    
+  </script>
+
+</body>
+
+</html>

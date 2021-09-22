@@ -1,0 +1,131 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+body {
+    font-family: 'Poppins';
+}
+
+.wrapper {
+    background: linear-gradient(-45deg, #38D996, #38D996, #972222a4, #972222a4 );
+    background-size: 400% 400%;
+    animation: gradient 10s ease infinite;
+}
+@keyframes gradient {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+.banner {
+    background: url("images/ph-1.jpg")fixed center/cover;
+    height: 700px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.banner::before {
+    content: "";
+    height: 100%;
+    width: 100%;
+    background: #38D996;
+    opacity: 0.6;
+}
+.banner_info{
+    padding: 0.3em;
+    position: absolute;
+    width: 100%;
+    max-width: 700px;
+    text-align: center;
+    columns: #fff;
+    margin: auto;
+}
+.banner_title{
+    line-height: 1.5;
+    font-size: 3em;
+    font-family: 'Poppins', sans-serif;
+}
+.banner_p{
+    line-height: 2;
+    font-size: 1.5em;
+    font-family: 'Poppins', sans-serif;
+}
+.whitespace{
+    height: 50vh;
+}
+
+.buscar{
+    
+    height: 50vh;
+}
+.btn {
+    margin-left: 9px;
+}
+
+.slideUpBtn {
+    padding: 12px 24px;
+    background-color: transparent;
+    border: 2px solid hsl(243, 80%, 62%);
+    border-radius: 6px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.5s cubic-bezier(1,.15,.34,.92);
+    font-family: "Poppins";
+}
+
+.slideUpBtn span {
+    display: inline-block;
+    transition: inherit;
+    color: hsl(243, 80%, 62%);
+}
+
+.slideUpBtn:hover span {
+    opacity: 0;
+    transform: translateY(-100%)
+}
+
+.slideUpBtn::before {
+    content: "";
+    background-color: hsl(243, 80%, 62%);;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    transform: translateY(100%);
+    transition: inherit;
+    width: 100%;
+    transition: transform 0.5s cubic-bezier(1,.15,.34,.92)
+}
+
+.slideUpBtn::after {
+    content: 'Cargar 😎';
+    align-items: center;
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    left: 0;
+    position: absolute;
+    top: 0;
+    transition: inherit;
+    transform: translateY(100%);
+    width: 100%;
+}
+
+.slideUpBtn:hover::before {
+    transform: translateY(0) scale(3);
+    transition-delay: .025s;
+}
+
+.slideUpBtn:hover::after {
+    opacity: 1;
+    color: hsl(222, 100%, 95%);
+    transform: translateY(0);
+}
+#mapContainer{
+    padding: 0rem 4rem 4rem 4rem;
+}
